@@ -1,3 +1,4 @@
+let timerType = 'pomodoro';
 let minutes = 25;
 const seconds = 60;
 
@@ -12,6 +13,19 @@ let restartBtn = document.getElementById('restartBtn');
 let intervalCountdown;
 
 let pomodoroTimer = minutes * seconds;
+
+function minutesPerOption(type){
+    if(type === 'pomodoro'){
+        minutes = 25;
+    }
+    else if(type === 'shortBreak') {
+        minutes = 5;
+    }
+    else if(type === 'longBreak'){
+        minutes = 15;
+    }
+    displayMin.textContent = minutes;
+}
 
 function countdown() {
     let minutes = Math.floor(pomodoroTimer / 60);
@@ -31,6 +45,7 @@ function countdown() {
         alert('Muerto');
     }
     document.title = minutes + ":" + seconds;
+
 }
 
 startBtn.onclick = function () {
@@ -50,13 +65,11 @@ pauseBtn.onclick = function () {
 
 
 shortBreak.onclick = function () {
-    minutes = 5;
-    displayMin.textContent = minutes;
+    
 }
 
 longBreak.onclick = function () {
-    minutes = 15;
-    displayMin.textContent = minutes;
+    
 }
 
 
