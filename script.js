@@ -14,18 +14,18 @@ let intervalCountdown;
 
 let pomodoroTimer = minutes * seconds;
 
-function minutesPerOption(type){
-    if(type === 'pomodoro'){
-        minutes = 25;
-    }
-    else if(type === 'shortBreak') {
-        minutes = 5;
-    }
-    else if(type === 'longBreak'){
-        minutes = 15;
-    }
-    displayMin.textContent = minutes;
-}
+// function minutesPerOption(type){
+//     if(type === 'pomodoro'){
+//         minutes = 25;
+//     }
+//     else if(type === 'shortBreak') {
+//         minutes = 5;
+//     }
+//     else if(type === 'longBreak'){
+//         minutes = 15;
+//     }
+//     displayMin.textContent = minutes;
+// }
 
 function countdown() {
     let minutes = Math.floor(pomodoroTimer / 60);

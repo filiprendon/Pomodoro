@@ -68,3 +68,7 @@ body {
     padding: 100px;
     display: flex;
 }
+
+.taskManager{
+    display: absolute;
+}
