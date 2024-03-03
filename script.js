@@ -1,9 +1,15 @@
-const minutes = 0.2;
+let minutes = 25;
 const seconds = 60;
 
 let displayMin = document.getElementById('min');
 let displaySec = document.getElementById('sec');
+let startBtn = document.getElementById('startBtn');
+let shortBreak = document.getElementById('short-break');
+let longBreak = document.getElementById('long-break');
+// let pauseBtn = document.getElementById('pauseBtn');
+let restartBtn = document.getElementById('restartBtn');
 
+let intervalCountdown;
 
 let pomodoroTimer = minutes * seconds;
 
@@ -26,8 +32,32 @@ function countdown() {
     }
     document.title = minutes + ":" + seconds;
 }
-let intervalCountdown = setInterval(countdown, 1000);
 
+startBtn.onclick = function () {
+    intervalCountdown = setInterval(countdown, 1000);
+    // startBtn.textContent = 'Pause';
+}
+
+
+pauseBtn.onclick = function () {
+    clearInterval(intervalCountdown);
+    pauseBtn.textContent = "Pause";
+}
+
+// restartBtn.onclick = function() {
+//     location.reload();
+// }
+
+
+shortBreak.onclick = function () {
+    minutes = 5;
+    displayMin.textContent = minutes;
+}
+
+longBreak.onclick = function () {
+    minutes = 15;
+    displayMin.textContent = minutes;
+}
 
 
 // countdown();
