@@ -1,14 +1,33 @@
-let minutes = 25;
-let seconds = 60;
+const minutes = 0.2;
+const seconds = 60;
 
-document.getElementById('min').textContent = minutes;
-document.getElementById('sec').textContent = seconds;
+let displayMin = document.getElementById('min');
+let displaySec = document.getElementById('sec');
 
-function countdown(){
-    setInterval(() => {
-        seconds = seconds-1;
-        
-        console.log(seconds);
-    }, 1000);
+
+let pomodoroTimer = minutes * seconds;
+
+function countdown() {
+    let minutes = Math.floor(pomodoroTimer / 60);
+    let seconds = pomodoroTimer % 60;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    displayMin.textContent = minutes;
+    displaySec.textContent = seconds;
+
+    console.log(minutes, seconds);
+    pomodoroTimer--;
+
+    if (pomodoroTimer < 0) {
+        clearInterval(intervalCountdown);
+        alert('Muerto');
+    }
+    document.title = minutes + ":" + seconds;
 }
-countdown();
+let intervalCountdown = setInterval(countdown, 1000);
+
+
+
+// countdown();
