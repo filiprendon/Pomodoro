@@ -43,3 +43,9 @@ body {
     width: 175px;
     height: 175px;
 }
+
+#temporizador p{
+    font-family: monospace;
+    font-size: 3rem;
+    
+}
