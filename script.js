@@ -1,4 +1,4 @@
-let timerType = 'pomodoro';
+// let timerType = 'pomodoro';
 let minutes = 25;
 const seconds = 60;
 
