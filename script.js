@@ -1,4 +1,5 @@
-// let timerType = 'pomodoro';
+let timerType = 'pomodoro';
+let isPaused = false;
 let minutes = 25;
 const seconds = 60;
 
@@ -14,18 +15,20 @@ let intervalCountdown;
 
 let pomodoroTimer = minutes * seconds;
 
-// function minutesPerOption(type){
-//     if(type === 'pomodoro'){
-//         minutes = 25;
-//     }
-//     else if(type === 'shortBreak') {
-//         minutes = 5;
-//     }
-//     else if(type === 'longBreak'){
-//         minutes = 15;
-//     }
-//     displayMin.textContent = minutes;
-// }
+function minutesPerOption(type) {
+    if (type === 'pomodoro') {
+        minutes = 25;
+    }
+    else if (type === shortBreak) {
+        minutes = 5;
+    }
+    else if (type === longBreak) {
+        minutes = 15;
+    }
+    displayMin.textContent = minutes;
+}
+
+
 
 function countdown() {
     let minutes = Math.floor(pomodoroTimer / 60);
@@ -48,16 +51,19 @@ function countdown() {
 
 }
 
+
 startBtn.onclick = function () {
-    intervalCountdown = setInterval(countdown, 1000);
-    // startBtn.textContent = 'Pause';
-}
+    if (!isPaused) {
+        intervalCountdown = setInterval(countdown, 1000);
+        startBtn.textContent = 'Pause';
+    } else {
+        clearInterval(intervalCountdown);
+        startBtn.textContent = 'Resume';
+    }
+    isPaused = !isPaused;
+};
 
 
-pauseBtn.onclick = function () {
-    clearInterval(intervalCountdown);
-    pauseBtn.textContent = "Pause";
-}
 
 // restartBtn.onclick = function() {
 //     location.reload();
@@ -65,11 +71,11 @@ pauseBtn.onclick = function () {
 
 
 shortBreak.onclick = function () {
-    
+    // intervalCountdown = setInterval(countdown, 1000);
 }
 
 longBreak.onclick = function () {
-    
+
 }
 
 
