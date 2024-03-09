@@ -33,8 +33,7 @@ function minutesPerOption() {
 
 
 
-function countdown() {    
-
+function countdown() {
     minutes = Math.floor(pomodoroTimer / 60);
     seconds = pomodoroTimer % 60;
 
@@ -51,7 +50,12 @@ function countdown() {
         clearInterval(intervalCountdown);
         console.log('Muerto');
     }
-    document.title = minutes + ":" + seconds;
+    if(timerType == shortBreak || timerType == longBreak){
+        document.title = minutes + ":" + seconds + ' - Break';
+    }else{
+        document.title = minutes + ":" + seconds + ' - Work';
+    }
+    
 
 }
 

@@ -1,9 +1,10 @@
-*{
+* {
     font-family: 'Rubik', cursive;
     /* padding: 0; */
     box-sizing: border-box;
     user-select: none;
 }
+
 body {
     height: 100vh;
     margin: 0;
@@ -14,7 +15,7 @@ body {
     align-items: center;
 }
 
-.panel{
+.panel {
     display: flex;
     gap: 25px;
     justify-content: center;
@@ -24,19 +25,22 @@ body {
     font-weight: bold;
     text-align: center;
     border: none;
-    background-color: antiquewhite;
+    background-color: rgb(250, 235, 215);
+    backdrop-filter: blur(10px);
     padding: 25px;
     border-radius: 10px;
 }
 
-.panel > button{
+.panel>button {
     cursor: pointer;
     border: none;
     background-color: transparent;
 }
-.panel > button:disabled{
+
+.panel>button:disabled {
     cursor: default;
 }
+
 .container-temporizador {
     display: grid;
     justify-content: center;
@@ -46,20 +50,20 @@ body {
     height: 100px;
 }
 
-#startBtn{
+#startBtn {
     /* display: flex; */
     background-color: transparent;
     border: none;
 }
 
-.buttons{
+.buttons {
     display: flex;
     gap: 15px;
     justify-content: center;
     align-items: center;
 }
 
-.temporizador{
+.temporizador {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,13 +72,13 @@ body {
     height: 175px;
 }
 
-.temporizador p{
+.temporizador p {
     font-family: monospace;
     font-size: 3rem;
-    
+
 }
 
-#btnTimer{
+#btnTimer {
     background-color: bisque;
     border: none;
     border-radius: 900px;
@@ -82,7 +86,50 @@ body {
     display: flex;
 }
 
-#kanban{
-    display: absolute;
-}
+#kanban {
+    margin-top: 250px;
+  }
+  .columns{
+    display: flex;
+  }
+  
+  .column {
+    flex: 1;
+    padding: 15px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .column-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .task-list, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .task {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    cursor: grab;
+  }
+  
+  .to-do-column .task {
+    background-color: #ffff99;
+  }
+  
+  .doing-column .task {
+    background-color: #c0ffc0;
+  }
+  
+  .done-column .task {
+    background-color: #99ff99;
+  }
   
