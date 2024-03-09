@@ -55,7 +55,6 @@ function countdown() {
         document.title = minutes + ":" + seconds + ' - Work';
     }
 
-
 }
 
 function disabledButtons() {
@@ -63,35 +62,10 @@ function disabledButtons() {
     longBreak.disabled = false;
     pomodoro.disabled = true;
 }
+
 disabledButtons();
 
-
-function user() {
-    startBtn.onclick = function () {
-        if (!isPaused) {
-            intervalCountdown = setInterval(countdown, 1000);
-            startBtn.textContent = 'Pause';
-        } else {
-            clearInterval(intervalCountdown);
-            startBtn.textContent = 'Resume';
-        }
-        isPaused = !isPaused;
-    }
-
-    addTask.onclick = function () {
-        let title = document.getElementById('taskText').value;
-        let description = document.getElementById('description').value;
-        if (title == '' || description == '') {
-            alert('');
-            return;
-        }
-        else {
-            document.getElementById('to-do').innerHTML += `<li class="task"><h5><b>` + title + `</h5> </b><br><p>` + description + `</p></li>`;
-            document.getElementById('taskText').value = '';
-            document.getElementById('description').value = '';
-        }
-
-    }
+function panelControls() {
     shortBreak.onclick = function () {
         disabledButtons();
         timerType = shortBreak;
@@ -115,4 +89,36 @@ function user() {
         pomodoro.disabled = true;
     }
 }
-user();
+
+
+function deleteTasks(){
+    document.getElementById('delete').innerHTML = '';
+}
+
+startBtn.onclick = function () {
+    if (!isPaused) {
+        intervalCountdown = setInterval(countdown, 1000);
+        startBtn.textContent = 'Pause';
+    } else {
+        clearInterval(intervalCountdown);
+        startBtn.textContent = 'Resume';
+    }
+    isPaused = !isPaused;
+}
+
+addTask.onclick = function () {
+    let title = document.getElementById('taskText').value;
+    let description = document.getElementById('description').value;
+    if (title == '' || description == '') {
+        alert('');
+        return;
+    }
+    else {
+        document.getElementById('to-do').innerHTML += `<li class="task"><h5><b>` + title + `</h5> </b><br><p>` + description + `</p></li>`;
+        document.getElementById('taskText').value = '';
+        document.getElementById('description').value = '';
+    }
+
+}
+
+panelControls();
