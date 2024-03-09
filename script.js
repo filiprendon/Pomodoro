@@ -7,8 +7,7 @@ let startBtn = document.getElementById('startBtn');
 let shortBreak = document.getElementById('short-break');
 let longBreak = document.getElementById('long-break');
 let pomodoro = document.getElementById('pomodoro');
-// let pauseBtn = document.getElementById('pauseBtn');
-let restartBtn = document.getElementById('restartBtn');
+let addTask = document.getElementById('add');
 
 let intervalCountdown;
 
@@ -50,51 +49,70 @@ function countdown() {
         clearInterval(intervalCountdown);
         console.log('Muerto');
     }
-    if(timerType == shortBreak || timerType == longBreak){
+    if (timerType == shortBreak || timerType == longBreak) {
         document.title = minutes + ":" + seconds + ' - Break';
-    }else{
+    } else {
         document.title = minutes + ":" + seconds + ' - Work';
     }
-    
+
 
 }
 
-function disabledButtons(){
+function disabledButtons() {
     shortBreak.disabled = false;
     longBreak.disabled = false;
     pomodoro.disabled = true;
 }
-disabledButtons()
-startBtn.onclick = function () {
-    if (!isPaused) {
-        intervalCountdown = setInterval(countdown, 1000);
-        startBtn.textContent = 'Pause';
-    } else {
-        clearInterval(intervalCountdown);
-        startBtn.textContent = 'Resume';
+disabledButtons();
+
+
+function user() {
+    startBtn.onclick = function () {
+        if (!isPaused) {
+            intervalCountdown = setInterval(countdown, 1000);
+            startBtn.textContent = 'Pause';
+        } else {
+            clearInterval(intervalCountdown);
+            startBtn.textContent = 'Resume';
+        }
+        isPaused = !isPaused;
     }
-    isPaused = !isPaused;
-}
 
-shortBreak.onclick = function(){
-    disabledButtons();
-    timerType = shortBreak;
-    minutesPerOption();
-    shortBreak.disabled = true;
-    pomodoro.disabled = false;
-}
+    addTask.onclick = function () {
+        let title = document.getElementById('taskText').value;
+        let description = document.getElementById('description').value;
+        if (title == '' || description == '') {
+            alert('');
+            return;
+        }
+        else {
+            document.getElementById('to-do').innerHTML += `<li class="task"><h5><b>` + title + `</h5> </b><br><p>` + description + `</p></li>`;
+            document.getElementById('taskText').value = '';
+            document.getElementById('description').value = '';
+        }
 
-longBreak.onclick = function(){
-    disabledButtons();
-    timerType = longBreak;
-    minutesPerOption();
-    longBreak.disabled = true;
-    pomodoro.disabled = false;
-}
+    }
+    shortBreak.onclick = function () {
+        disabledButtons();
+        timerType = shortBreak;
+        minutesPerOption();
+        shortBreak.disabled = true;
+        pomodoro.disabled = false;
+    }
 
-pomodoro.onclick = function(){
-    disabledButtons();
-    timerType = pomodoro;
-    minutesPerOption();
-    pomodoro.disabled = true;
+    longBreak.onclick = function () {
+        disabledButtons();
+        timerType = longBreak;
+        minutesPerOption();
+        longBreak.disabled = true;
+        pomodoro.disabled = false;
+    }
+
+    pomodoro.onclick = function () {
+        disabledButtons();
+        timerType = pomodoro;
+        minutesPerOption();
+        pomodoro.disabled = true;
+    }
 }
+user();

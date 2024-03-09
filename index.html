@@ -37,7 +37,47 @@
         </div>
 
     </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add Task
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="add-task-container">
+                        <label for="taskText">Task title:</label>
+                        <input type="text" name="taskText" id="taskText" placeholder="Add a task..." />
+                    </div>
+                    <div class="description">
+                        <label for="description">Task description</label>
+                        <input type="text" maxlength="25" name="description" id="description"></input>
+                    </div>
+                    <div class="category">
+                        <label for="category">Hola</label>
+                        <select class="form-select" id="category" aria-label="Default select example">
+                            <option selected disabled>Choose a category</option>
+                            <option value="1">Dessign</option>
+                            <option value="2">Front-end</option>
+                            <option value="3">Back-end</option>
+                          </select>
+                    </div>
+                </div>
+                <button id="add" class="button add-button material-symbols-outlined">add_task</button>
+
+            </div>
+        </div>
+    </div>
+
+
     <div id="kanban">
+
         <ul class="columns">
 
             <li class="column to-do-column">
@@ -79,6 +119,20 @@
                     <li class="task">
                         <p>Preuba 100</p>
                     </li>
+                </ul>
+            </li>
+            <li class="column delete-column">
+                <div class="column-header">
+                    <h4>Delete</h4>
+                </div>
+                <ul class="task-list" id="delete">
+                    <li class="task">
+                        <p>Pruebas a borrar</p>
+                    </li>
+                    <li class="task">
+                        <p>Hola que tal</p>
+                    </li>
+                    <button id="deleteBtn" class="material-symbols-outlined">delete</button>
                 </ul>
             </li>
 
