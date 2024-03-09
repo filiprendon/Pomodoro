@@ -77,10 +77,12 @@ body {
     font-size: 3rem;
 
 }
-.modal-body{
+
+.modal-body {
     display: flex;
     flex-direction: column;
 }
+
 #btnTimer {
     background-color: bisque;
     border: none;
@@ -98,10 +100,21 @@ body {
     display: flex;
 }
 
+#deleteBtn {
+    width: 100%;
+    display: block;
+    margin: 0;
+    background-color: #a81e1e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+#deleteBtn:hover{
+    background-color: #860e0e;
+}
 .add-task-container {
     display: flex;
-    /* width: fit-content;
-    background: #a8a8a8; */
 }
 
 .add-task-container .button {
@@ -149,7 +162,7 @@ ul {
     background-color: #99ff99;
 }
 
-.delete-column .task{
+.delete-column .task {
     background-color: #f88989;
 }
 
@@ -157,38 +170,36 @@ ul {
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
-  }
-  
-  .add-task-container,
-  .description,
-  .category {
+}
+
+.add-task-container,
+.description,
+.category {
     margin-bottom: 25px;
-  }
-  
-  label {
+}
+
+label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-  }
-  
-  input[type="text"],
-  select {
+}
+
+input[type="text"],
+select {
     width: 100%;
     padding: 8px 10px;
     border: 1px solid #ddd;
     border-radius: 3px;
-  }
-  
-  .add-button {
+}
+
+.add-button {
     background-color: rgb(72, 187, 76);
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-button:hover {
+}
+
+.add-button:hover {
     background-color: rgb(62, 142, 65);
-  }
-  
+}

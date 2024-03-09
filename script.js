@@ -92,6 +92,7 @@ function panelControls() {
 
 
 function deleteTasks(){
+    // Hacer que el boton no se borre
     document.getElementById('delete').innerHTML = '';
 }
 
@@ -114,6 +115,7 @@ addTask.onclick = function () {
         return;
     }
     else {
+        // cambiar colores según categoría
         document.getElementById('to-do').innerHTML += `<li class="task"><h5><b>` + title + `</h5> </b><br><p>` + description + `</p></li>`;
         document.getElementById('taskText').value = '';
         document.getElementById('description').value = '';
