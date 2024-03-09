@@ -1,13 +1,12 @@
-let timerType = 'pomodoro';
 let isPaused = false;
 let minutes = 25;
-const seconds = 60;
-
+let seconds = 60;
 let displayMin = document.getElementById('min');
 let displaySec = document.getElementById('sec');
 let startBtn = document.getElementById('startBtn');
 let shortBreak = document.getElementById('short-break');
 let longBreak = document.getElementById('long-break');
+let pomodoro = document.getElementById('pomodoro');
 // let pauseBtn = document.getElementById('pauseBtn');
 let restartBtn = document.getElementById('restartBtn');
 
@@ -15,24 +14,41 @@ let intervalCountdown;
 
 let pomodoroTimer = minutes * seconds;
 
-function minutesPerOption(type) {
-    if (type === 'pomodoro') {
+function minutesPerOption() {
+    if (timerType === pomodoro) {
         minutes = 25;
+        pomodoroTimer = minutes * seconds;
     }
-    else if (type === shortBreak) {
+    else if (timerType === shortBreak) {
         minutes = 5;
+        pomodoroTimer = minutes * seconds;
     }
-    else if (type === longBreak) {
+    else if (timerType === longBreak) {
         minutes = 15;
+        pomodoroTimer = minutes * seconds;
     }
     displayMin.textContent = minutes;
+    countdown();
 }
 
 
 
-function countdown() {
-    let minutes = Math.floor(pomodoroTimer / 60);
-    let seconds = pomodoroTimer % 60;
+function countdown() {    
+    // if (timerType == pomodoro) {
+    //     minutes = 25;
+    //     // pomodoroTimer = minutes * seconds;
+    // }
+    // else if (timerType === shortBreak) {
+    //     minutes = 5;
+    //     // pomodoroTimer = minutes * seconds;
+    // }
+    // else if (timerType == longBreak) {
+    //     minutes = 15;
+    //     // pomodoroTimer = minutes * seconds;
+    // }
+
+    minutes = Math.floor(pomodoroTimer / 60);
+    seconds = pomodoroTimer % 60;
 
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -51,6 +67,11 @@ function countdown() {
 
 }
 
+function disabledButtons(){
+    shortBreak.disabled = false;
+    longBreak.disabled = false;
+    pomodoro.disabled = false;
+}
 
 startBtn.onclick = function () {
     if (!isPaused) {
@@ -61,22 +82,18 @@ startBtn.onclick = function () {
         startBtn.textContent = 'Resume';
     }
     isPaused = !isPaused;
-};
-
-
-
-// restartBtn.onclick = function() {
-//     location.reload();
-// }
-
-
-shortBreak.onclick = function () {
-    // intervalCountdown = setInterval(countdown, 1000);
 }
 
-longBreak.onclick = function () {
-
+shortBreak.onclick = function(){
+    disabledButtons();
+    timerType = shortBreak;
+    minutesPerOption();
+    shortBreak.disabled = true;
 }
 
-
-// countdown();
+longBreak.onclick = function(){
+    disabledButtons();
+    timerType = longBreak;
+    minutesPerOption();
+    longBreak.disabled = true;
+}

@@ -1,4 +1,5 @@
 *{
+    font-family: 'Rubik', cursive;
     /* padding: 0; */
     box-sizing: border-box;
     user-select: none;
@@ -20,16 +21,22 @@ body {
     align-items: center;
     margin-top: 15px;
     height: 25px;
-    cursor: pointer !important;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
     border: none;
     background-color: antiquewhite;
-    padding: 15px;
+    padding: 25px;
     border-radius: 10px;
 }
 
+.panel > button{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+.panel > button:disabled{
+    cursor: default;
+}
 .container-temporizador {
     display: grid;
     justify-content: center;
@@ -40,7 +47,9 @@ body {
 }
 
 #startBtn{
-    display: flex;
+    /* display: flex; */
+    background-color: transparent;
+    border: none;
 }
 
 .buttons{
@@ -73,6 +82,6 @@ body {
     display: flex;
 }
 
-.taskManager{
+#kanban{
     display: absolute;
 }
