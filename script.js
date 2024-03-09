@@ -17,15 +17,15 @@ let pomodoroTimer = minutes * seconds;
 function minutesPerOption() {
     if (timerType === pomodoro) {
         minutes = 25;
-        pomodoroTimer = minutes * seconds;
+        pomodoroTimer = minutes * 60;
     }
     else if (timerType === shortBreak) {
         minutes = 5;
-        pomodoroTimer = minutes * seconds;
+        pomodoroTimer = minutes * 60;
     }
     else if (timerType === longBreak) {
         minutes = 15;
-        pomodoroTimer = minutes * seconds;
+        pomodoroTimer = minutes * 60;
     }
     displayMin.textContent = minutes;
     countdown();
@@ -34,18 +34,6 @@ function minutesPerOption() {
 
 
 function countdown() {    
-    // if (timerType == pomodoro) {
-    //     minutes = 25;
-    //     // pomodoroTimer = minutes * seconds;
-    // }
-    // else if (timerType === shortBreak) {
-    //     minutes = 5;
-    //     // pomodoroTimer = minutes * seconds;
-    // }
-    // else if (timerType == longBreak) {
-    //     minutes = 15;
-    //     // pomodoroTimer = minutes * seconds;
-    // }
 
     minutes = Math.floor(pomodoroTimer / 60);
     seconds = pomodoroTimer % 60;
@@ -56,12 +44,12 @@ function countdown() {
     displayMin.textContent = minutes;
     displaySec.textContent = seconds;
 
-    console.log(minutes, seconds);
+    // console.log(minutes, seconds);
     pomodoroTimer--;
 
     if (pomodoroTimer < 0) {
         clearInterval(intervalCountdown);
-        alert('Muerto');
+        console.log('Muerto');
     }
     document.title = minutes + ":" + seconds;
 
@@ -70,9 +58,9 @@ function countdown() {
 function disabledButtons(){
     shortBreak.disabled = false;
     longBreak.disabled = false;
-    pomodoro.disabled = false;
+    pomodoro.disabled = true;
 }
-
+disabledButtons()
 startBtn.onclick = function () {
     if (!isPaused) {
         intervalCountdown = setInterval(countdown, 1000);
@@ -89,6 +77,7 @@ shortBreak.onclick = function(){
     timerType = shortBreak;
     minutesPerOption();
     shortBreak.disabled = true;
+    pomodoro.disabled = false;
 }
 
 longBreak.onclick = function(){
@@ -96,4 +85,12 @@ longBreak.onclick = function(){
     timerType = longBreak;
     minutesPerOption();
     longBreak.disabled = true;
+    pomodoro.disabled = false;
+}
+
+pomodoro.onclick = function(){
+    disabledButtons();
+    timerType = pomodoro;
+    minutesPerOption();
+    pomodoro.disabled = true;
 }
