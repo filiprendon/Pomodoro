@@ -1,8 +1,10 @@
-*{
+* {
+    font-family: 'Rubik', cursive;
     /* padding: 0; */
     box-sizing: border-box;
     user-select: none;
 }
+
 body {
     height: 100vh;
     margin: 0;
@@ -13,21 +15,30 @@ body {
     align-items: center;
 }
 
-.panel{
+.panel {
     display: flex;
     gap: 25px;
     justify-content: center;
     align-items: center;
     margin-top: 15px;
     height: 25px;
-    cursor: pointer !important;
-    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
     border: none;
-    background-color: antiquewhite;
-    padding: 15px;
+    background-color: rgb(250, 235, 215);
+    backdrop-filter: blur(10px);
+    padding: 25px;
     border-radius: 10px;
+}
+
+.panel>button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.panel>button:disabled {
+    cursor: default;
 }
 
 .container-temporizador {
@@ -39,18 +50,20 @@ body {
     height: 100px;
 }
 
-#startBtn{
-    display: flex;
+#startBtn {
+    /* display: flex; */
+    background-color: transparent;
+    border: none;
 }
 
-.buttons{
+.buttons {
     display: flex;
     gap: 15px;
     justify-content: center;
     align-items: center;
 }
 
-.temporizador{
+.temporizador {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,13 +72,18 @@ body {
     height: 175px;
 }
 
-.temporizador p{
+.temporizador p {
     font-family: monospace;
     font-size: 3rem;
-    
+
 }
 
-#btnTimer{
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+#btnTimer {
     background-color: bisque;
     border: none;
     border-radius: 900px;
@@ -73,6 +91,115 @@ body {
     display: flex;
 }
 
-.taskManager{
-    display: absolute;
+#kanban {
+    display: flex;
+    margin-top: 250px;
+}
+
+.columns {
+    display: flex;
+}
+
+#deleteBtn {
+    width: 100%;
+    display: block;
+    margin: 0;
+    background-color: #a81e1e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+#deleteBtn:hover{
+    background-color: #860e0e;
+}
+.add-task-container {
+    display: flex;
+}
+
+.add-task-container .button {
+    border: none;
+}
+
+.column {
+    flex: 1;
+    padding: 15px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.column-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.task-list,
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    cursor: grab;
+}
+
+.to-do-column .task {
+    background-color: #ffff99;
+}
+
+.doing-column .task {
+    background-color: #c0ffc0;
+}
+
+.done-column .task {
+    background-color: #99ff99;
+}
+
+.delete-column .task {
+    background-color: #f88989;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.add-task-container,
+.description,
+.category {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.add-button {
+    background-color: rgb(72, 187, 76);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.add-button:hover {
+    background-color: rgb(62, 142, 65);
 }

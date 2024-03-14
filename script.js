@@ -1,38 +1,40 @@
-let timerType = 'pomodoro';
 let isPaused = false;
 let minutes = 25;
-const seconds = 60;
-
+let seconds = 60;
 let displayMin = document.getElementById('min');
 let displaySec = document.getElementById('sec');
 let startBtn = document.getElementById('startBtn');
 let shortBreak = document.getElementById('short-break');
 let longBreak = document.getElementById('long-break');
-// let pauseBtn = document.getElementById('pauseBtn');
-let restartBtn = document.getElementById('restartBtn');
+let pomodoro = document.getElementById('pomodoro');
+let addTask = document.getElementById('add');
 
 let intervalCountdown;
 
 let pomodoroTimer = minutes * seconds;
 
-function minutesPerOption(type) {
-    if (type === 'pomodoro') {
+function minutesPerOption() {
+    if (timerType === pomodoro) {
         minutes = 25;
+        pomodoroTimer = minutes * 60;
     }
-    else if (type === shortBreak) {
+    else if (timerType === shortBreak) {
         minutes = 5;
+        pomodoroTimer = minutes * 60;
     }
-    else if (type === longBreak) {
+    else if (timerType === longBreak) {
         minutes = 15;
+        pomodoroTimer = minutes * 60;
     }
     displayMin.textContent = minutes;
+    countdown();
 }
 
 
 
 function countdown() {
-    let minutes = Math.floor(pomodoroTimer / 60);
-    let seconds = pomodoroTimer % 60;
+    minutes = Math.floor(pomodoroTimer / 60);
+    seconds = pomodoroTimer % 60;
 
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -40,17 +42,59 @@ function countdown() {
     displayMin.textContent = minutes;
     displaySec.textContent = seconds;
 
-    console.log(minutes, seconds);
+    // console.log(minutes, seconds);
     pomodoroTimer--;
 
     if (pomodoroTimer < 0) {
         clearInterval(intervalCountdown);
-        alert('Muerto');
+        console.log('Muerto');
     }
-    document.title = minutes + ":" + seconds;
+    if (timerType == shortBreak || timerType == longBreak) {
+        document.title = minutes + ":" + seconds + ' - Break';
+    } else {
+        document.title = minutes + ":" + seconds + ' - Work';
+    }
 
 }
 
+function disabledButtons() {
+    shortBreak.disabled = false;
+    longBreak.disabled = false;
+    pomodoro.disabled = true;
+}
+
+disabledButtons();
+
+function panelControls() {
+    shortBreak.onclick = function () {
+        disabledButtons();
+        timerType = shortBreak;
+        minutesPerOption();
+        shortBreak.disabled = true;
+        pomodoro.disabled = false;
+    }
+
+    longBreak.onclick = function () {
+        disabledButtons();
+        timerType = longBreak;
+        minutesPerOption();
+        longBreak.disabled = true;
+        pomodoro.disabled = false;
+    }
+
+    pomodoro.onclick = function () {
+        disabledButtons();
+        timerType = pomodoro;
+        minutesPerOption();
+        pomodoro.disabled = true;
+    }
+}
+
+
+function deleteTasks(){
+    // Hacer que el boton no se borre
+    document.getElementById('delete').innerHTML = '';
+}
 
 startBtn.onclick = function () {
     if (!isPaused) {
@@ -61,22 +105,22 @@ startBtn.onclick = function () {
         startBtn.textContent = 'Resume';
     }
     isPaused = !isPaused;
-};
-
-
-
-// restartBtn.onclick = function() {
-//     location.reload();
-// }
-
-
-shortBreak.onclick = function () {
-    // intervalCountdown = setInterval(countdown, 1000);
 }
 
-longBreak.onclick = function () {
+addTask.onclick = function () {
+    let title = document.getElementById('taskText').value;
+    let description = document.getElementById('description').value;
+    if (title == '' || description == '') {
+        alert('');
+        return;
+    }
+    else {
+        // cambiar colores según categoría
+        document.getElementById('to-do').innerHTML += `<li class="task"><h5><b>` + title + `</h5> </b><br><p>` + description + `</p></li>`;
+        document.getElementById('taskText').value = '';
+        document.getElementById('description').value = '';
+    }
 
 }
 
-
-// countdown();
+panelControls();
