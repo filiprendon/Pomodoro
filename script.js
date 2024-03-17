@@ -8,6 +8,8 @@ let shortBreak = document.getElementById('short-break');
 let longBreak = document.getElementById('long-break');
 let pomodoro = document.getElementById('pomodoro');
 let addTask = document.getElementById('add');
+let option = document.getElementById('category');
+let tasks = document.querySelectorAll('.to-do-column .task');
 
 let intervalCountdown;
 
@@ -30,6 +32,19 @@ function minutesPerOption() {
     countdown();
 }
 
+function optionColor(selectedOption) {
+    let newTasks = document.querySelectorAll('.new-task');
+    newTasks.forEach(task => {
+        if (selectedOption === '1') {
+            task.style.backgroundColor = '#55ade9';
+        } else if (selectedOption === '2') {
+            task.style.backgroundColor = '#d5b0ff';
+        } else if (selectedOption === '3') {
+            task.style.backgroundColor = '#c2b891';
+        }
+        task.classList.remove('new-task');
+    });
+}
 
 
 function countdown() {
@@ -91,8 +106,7 @@ function panelControls() {
 }
 
 
-function deleteTasks(){
-    // Hacer que el boton no se borre
+function deleteTasks() {
     document.getElementById('delete').innerHTML = '';
 }
 
@@ -110,17 +124,20 @@ startBtn.onclick = function () {
 addTask.onclick = function () {
     let title = document.getElementById('taskText').value;
     let description = document.getElementById('description').value;
+    let selectedOption = option.value;
+
     if (title == '' || description == '') {
         alert('');
         return;
     }
     else {
-        // cambiar colores según categoría
-        document.getElementById('to-do').innerHTML += `<li class="task"><h5><b>` + title + `</h5> </b><br><p>` + description + `</p></li>`;
+        // Añadpo la clase a la nueva tarea
+        let newTask = `<li class="task new-task"><h5><b>${title}</b></h5><br><p>${description}</p></li>`;
+        document.getElementById('to-do').innerHTML += newTask;
         document.getElementById('taskText').value = '';
         document.getElementById('description').value = '';
+        optionColor(selectedOption);
     }
-
 }
 
 panelControls();
