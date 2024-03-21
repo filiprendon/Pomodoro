@@ -1,3 +1,5 @@
+
+// VARIABLES
 let isPaused = false;
 let minutes = 25;
 let seconds = 60;
@@ -10,9 +12,7 @@ let pomodoro = document.getElementById('pomodoro');
 let addTask = document.getElementById('add');
 let option = document.getElementById('category');
 let tasks = document.querySelectorAll('.to-do-column .task');
-
 let intervalCountdown;
-
 let pomodoroTimer = minutes * seconds;
 
 function minutesPerOption() {
@@ -32,6 +32,7 @@ function minutesPerOption() {
     countdown();
 }
 
+// Función para diferente color según el select 
 function optionColor(selectedOption) {
     let newTasks = document.querySelectorAll('.new-task');
     newTasks.forEach(task => {
@@ -42,12 +43,14 @@ function optionColor(selectedOption) {
         } else if (selectedOption === '3') {
             task.style.backgroundColor = '#c2b891';
         }
+        // Le quito la clase para que cambie de color correctamente
         task.classList.remove('new-task');
     });
 }
 
 
 function countdown() {
+
     minutes = Math.floor(pomodoroTimer / 60);
     seconds = pomodoroTimer % 60;
 
@@ -131,7 +134,7 @@ addTask.onclick = function () {
         return;
     }
     else {
-        // Añadpo la clase a la nueva tarea
+        // Añado la clase a la nueva tarea
         let newTask = `<li class="task new-task"><h5><b>${title}</b></h5><br><p>${description}</p></li>`;
         document.getElementById('to-do').innerHTML += newTask;
         document.getElementById('taskText').value = '';
