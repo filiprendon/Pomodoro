@@ -143,7 +143,7 @@ ul {
 }
 
 .task {
-    padding: 5px;
+    padding: 15px;
     margin-bottom: 5px;
     border-radius: 3px;
     background-color: #f2f2f2;
@@ -151,7 +151,7 @@ ul {
 }
 
 .to-do-column .task {
-    background-color: #ffff99;
+    background-color: #dbdbdb;
 }
 
 .doing-column .task {

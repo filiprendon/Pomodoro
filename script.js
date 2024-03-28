@@ -108,6 +108,18 @@ function panelControls() {
     }
 }
 
+function currentDate() {
+    const d = new Date();
+    // 24 en vez de 2024
+    let year = d.getFullYear().toString().slice(-2);;
+    let month = d.getMonth() + 1;
+    let day = d.getDate();
+    let hours = d.getHours();
+    let minutes = d.getMinutes();
+    let currentDate = day + '/' + month + '/' + year + ' ' + hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
+    return currentDate;
+}
+
 
 function deleteTasks() {
     document.getElementById('delete').innerHTML = '';
@@ -135,11 +147,12 @@ addTask.onclick = function () {
     }
     else {
         // Añado la clase a la nueva tarea
-        let newTask = `<li class="task new-task"><h5><b>${title}</b></h5><br><p>${description}</p></li>`;
+        let newTask = `<li class="task new-task"><h5><b>${title}</b></h5><br><p>${description}</p><p>${currentDate()}</p></li>`;
         document.getElementById('to-do').innerHTML += newTask;
         document.getElementById('taskText').value = '';
         document.getElementById('description').value = '';
         optionColor(selectedOption);
+        console.log(currentDate())
     }
 }
 
