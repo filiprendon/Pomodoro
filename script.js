@@ -12,21 +12,22 @@ let pomodoro = document.getElementById('pomodoro');
 let addTask = document.getElementById('add');
 let option = document.getElementById('category');
 let tasks = document.querySelectorAll('.to-do-column .task');
+let alarm = document.getElementById('alarm');
 let intervalCountdown;
 let pomodoroTimer = minutes * seconds;
-let idCounter = 3;
+let idCounter = 1;
 
 function minutesPerOption() {
     if (timerType === pomodoro) {
-        minutes = 25;
+        minutes = .1;
         pomodoroTimer = minutes * 60;
     }
     else if (timerType === shortBreak) {
-        minutes = 5;
+        minutes = .1;
         pomodoroTimer = minutes * 60;
     }
     else if (timerType === longBreak) {
-        minutes = 15;
+        minutes = .1;
         pomodoroTimer = minutes * 60;
     }
     displayMin.textContent = minutes;
@@ -66,7 +67,14 @@ function countdown() {
 
     if (pomodoroTimer < 0) {
         clearInterval(intervalCountdown);
-        console.log('Muerto');
+        alarm.play();
+        setTimeout(() => {
+            if (confirm('Time out')) {
+                alarm.pause();
+                alarm.currentTime = 0;
+            }
+        }, 100);
+
     }
     if (timerType == shortBreak || timerType == longBreak) {
         document.title = minutes + ":" + seconds + ' - Break';
@@ -123,7 +131,15 @@ function currentDate() {
 
 
 function deleteTasks() {
-    document.getElementById('delete').innerHTML = '';
+    if (document.getElementById('delete').innerHTML == '') {
+        alert('No tasks to delete')
+    } else {
+        if (confirm('Do you want to permanently delete these tasks?')) {
+            document.getElementById('delete').innerHTML = '';
+        } else {
+            return;
+        }
+    }
 }
 
 function drag(event) {
@@ -147,7 +163,30 @@ function drop(event) {
     if (target && target.classList.contains('column')) {
         target.querySelector('.task-list').appendChild(document.getElementById(data));
     }
+
+    if (target && target.classList.contains('done-column')) {
+        document.getElementById(data).draggable = false;
+
+        let taskElement = document.getElementById(data);
+
+        // Crear el SVG para el check verde
+        let checkSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        checkSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        checkSVG.setAttribute("width", "16");
+        checkSVG.setAttribute("height", "16");
+        checkSVG.setAttribute("fill", "green");
+        checkSVG.setAttribute("class", "bi bi-check-square-fill check-icon-svg");
+        checkSVG.setAttribute("viewBox", "0 0 16 16");
+
+        let checkPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        checkPath.setAttribute("d", "M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z");
+
+        checkSVG.appendChild(checkPath);
+        taskElement.appendChild(checkSVG);
+    }
 }
+
+
 
 
 startBtn.onclick = function () {
@@ -167,7 +206,7 @@ addTask.onclick = function () {
     let selectedOption = option.value;
 
     if (title == '' || description == '') {
-        alert('');
+        alert('Please add a title and a description');
         return;
     }
     else {
@@ -177,8 +216,10 @@ addTask.onclick = function () {
         let newTask = `<li class="task new-task" id=${taskId} draggable="true" draggable="true" ondragstart="drag(event)">
         <h5><b>${title}</b></h5><br><p>${description}</p><p>${currentDate()}</p></li>`;
         document.getElementById('to-do').innerHTML += newTask;
+        // Borrar el contenido de la tarea que acabamos de añadir
         document.getElementById('taskText').value = '';
         document.getElementById('description').value = '';
+        document.getElementById('category').value = '0';
         optionColor(selectedOption);
         console.log(currentDate())
     }

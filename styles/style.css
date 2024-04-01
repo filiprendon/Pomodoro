@@ -155,11 +155,11 @@ ul {
 }
 
 .doing-column .task {
-    background-color: #c0ffc0;
+    background-color: #c0e8ff;
 }
 
 .done-column .task {
-    background-color: #99ff99;
+    background-color: #99b899;
 }
 
 .delete-column .task {

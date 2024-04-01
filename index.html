@@ -14,6 +14,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
+    <audio id="alarm" src="alarm.mp3"></audio>
 </head>
 
 <body>
@@ -63,7 +64,7 @@
                     <div class="category">
                         <label for="category">Category:</label>
                         <select class="form-select" id="category" aria-label="Default select example">
-                            <option selected disabled>Choose a category</option>
+                            <option value="0" selected disabled>Choose a category</option>
                             <option value="1">Dessign</option>
                             <option value="2">Front-end</option>
                             <option value="3">Back-end</option>
@@ -87,15 +88,15 @@
                     <h4>To Do</h4>
                 </div>
                 <ul class="task-list" id="to-do">
-                    <li class="task" id="task1" draggable="true" ondragstart="drag(event)">
+                    <!-- <li class="task" id="task1" draggable="true" ondragstart="drag(event)">
                         <p>Prueba</p>
                     </li>
                     <li class="task" id="task2" draggable="true" ondragstart="drag(event)">
                         <p>Prueba 2</p>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
-            
+
             <li class="column doing-column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="column-header">
                     <h4>Doing</h4>
@@ -109,22 +110,23 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="column done-column" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="false">
                 <div class="column-header">
                     <h4>Done</h4>
                 </div>
-                <ul class="task-list" id="done">    
+                <ul class="task-list" id="done">
                     <li class="task" id="task5">
                         <p>Qué pasó con el video?</p>
+                        <span class="check-icon"></span>
                     </li>
                     <li class="task" id="task6">
                         <p>Preuba 100</p>
                     </li>
                 </ul>
             </li>
-            
-            <li class="column delete-column">
+
+            <li class="column delete-column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="column-header">
                     <h4>Delete</h4>
                 </div>
@@ -138,7 +140,7 @@
                 </ul>
                 <button id="deleteBtn" class="material-symbols-outlined" onclick="deleteTasks()">delete</button>
             </li>
-            
+
         </ul>
     </div>
 </body>
