@@ -82,62 +82,63 @@
 
         <ul class="columns">
 
-            <li class="column to-do-column">
+            <li class="column to-do-column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="column-header">
                     <h4>To Do</h4>
                 </div>
                 <ul class="task-list" id="to-do">
-                    <li class="task">
+                    <li class="task" id="task1" draggable="true" ondragstart="drag(event)">
                         <p>Prueba</p>
                     </li>
-                    <li class="task">
+                    <li class="task" id="task2" draggable="true" ondragstart="drag(event)">
                         <p>Prueba 2</p>
                     </li>
                 </ul>
             </li>
-
-            <li class="column doing-column">
+            
+            <li class="column doing-column" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <div class="column-header">
                     <h4>Doing</h4>
                 </div>
                 <ul class="task-list" id="doing">
-                    <li class="task">
+                    <li class="task" id="task3" draggable="true" ondragstart="drag(event)">
                         <p>Hola amigos</p>
                     </li>
-                    <li class="task">
+                    <li class="task" id="task4" draggable="true" ondragstart="drag(event)">
                         <p>De youtube</p>
                     </li>
                 </ul>
             </li>
-
-            <li class="column done-column">
+            
+            <li class="column done-column" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="false">
                 <div class="column-header">
                     <h4>Done</h4>
                 </div>
-                <ul class="task-list" id="done">
-                    <li class="task">
+                <ul class="task-list" id="done">    
+                    <li class="task" id="task5">
                         <p>Qué pasó con el video?</p>
                     </li>
-                    <li class="task">
+                    <li class="task" id="task6">
                         <p>Preuba 100</p>
                     </li>
                 </ul>
             </li>
+            
             <li class="column delete-column">
                 <div class="column-header">
                     <h4>Delete</h4>
                 </div>
                 <ul class="task-list" id="delete">
-                    <li class="task">
+                    <li class="task" id="task7">
                         <p>Pruebas a borrar</p>
                     </li>
-                    <li class="task">
+                    <li class="task" id="task8">
                         <p>Hola que tal</p>
                     </li>
                 </ul>
                 <button id="deleteBtn" class="material-symbols-outlined" onclick="deleteTasks()">delete</button>
             </li>
-
+            
         </ul>
     </div>
 </body>

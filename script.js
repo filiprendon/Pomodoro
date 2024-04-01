@@ -14,6 +14,7 @@ let option = document.getElementById('category');
 let tasks = document.querySelectorAll('.to-do-column .task');
 let intervalCountdown;
 let pomodoroTimer = minutes * seconds;
+let idCounter = 3;
 
 function minutesPerOption() {
     if (timerType === pomodoro) {
@@ -125,6 +126,30 @@ function deleteTasks() {
     document.getElementById('delete').innerHTML = '';
 }
 
+function drag(event) {
+    event.dataTransfer.setData('text', event.target.id);
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    let data = event.dataTransfer.getData("text");
+    let target = event.target;
+
+    // Buscar el elemento de columna ascendiendo en la jerarquía de elementos DOM
+    while (target && !target.classList.contains('column')) {
+        target = target.parentNode;
+    }
+    // Verificar si se encontró un elemento de columna
+    if (target && target.classList.contains('column')) {
+        target.querySelector('.task-list').appendChild(document.getElementById(data));
+    }
+}
+
+
 startBtn.onclick = function () {
     if (!isPaused) {
         intervalCountdown = setInterval(countdown, 1000);
@@ -147,7 +172,10 @@ addTask.onclick = function () {
     }
     else {
         // Añado la clase a la nueva tarea
-        let newTask = `<li class="task new-task"><h5><b>${title}</b></h5><br><p>${description}</p><p>${currentDate()}</p></li>`;
+        let taskId = 'task' + idCounter;
+        idCounter++;
+        let newTask = `<li class="task new-task" id=${taskId} draggable="true" draggable="true" ondragstart="drag(event)">
+        <h5><b>${title}</b></h5><br><p>${description}</p><p>${currentDate()}</p></li>`;
         document.getElementById('to-do').innerHTML += newTask;
         document.getElementById('taskText').value = '';
         document.getElementById('description').value = '';
