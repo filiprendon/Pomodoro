@@ -17,6 +17,7 @@ let intervalCountdown;
 let pomodoroTimer = minutes * seconds;
 let idCounter = 1;
 
+// Comentarios crack
 function minutesPerOption() {
     if (timerType === pomodoro) {
         minutes = .1;
