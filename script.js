@@ -13,9 +13,14 @@ let option = document.getElementById("category");
 let tasks = document.querySelectorAll(".to-do-column .task");
 let alarm = document.getElementById("alarm");
 let doneTasks = document.querySelectorAll("#done > li");
+let contextMenu = document.querySelector(".context-menu");
+let addDeletePanel = document.querySelector(".addDeletePanel");
+let undo = document.querySelector(".undo");
+let undoElement;
 let intervalCountdown;
 let pomodoroTimer = minutes * seconds;
 let idCounter = 1;
+let currentElement;
 
 // Comentarios crack
 function minutesPerOption() {
@@ -147,6 +152,8 @@ function deleteTasks() {
 
 function drag(event) {
   event.dataTransfer.setData("text", event.target.id);
+  console.log(event.target.parentNode);
+  undoElement = event.target.parentNode;
 }
 
 function allowDrop(event) {
@@ -173,7 +180,8 @@ function drop(event) {
     document.getElementById(data).draggable = false;
 
     let taskElement = document.getElementById(data);
-
+    console.log(taskElement);
+    contextMenuPrint(taskElement);
     // Crear el SVG para el check verde
     let checkSVG = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -199,12 +207,45 @@ function drop(event) {
     taskElement.appendChild(checkSVG);
   }
 }
-doneTasks.forEach((element) => {
-  element.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-    console.log("hola");
+function contextMenuPrint(element) {
+  doneTasks.forEach((element) => {
+    element.addEventListener("contextmenu", function (e) {
+      e.preventDefault();
+      contextMenu.style.display = "block";
+      contextMenu.style.left = e.pageX + "px";
+      contextMenu.style.top = e.pageY + "px";
+      // Guardo el elemento al que se le ha dado click derecho
+      currentElement = this;
+      console.log(currentElement);
+    });
   });
+}
+
+contextMenuPrint();
+
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
 });
+
+document.addEventListener("click", function () {
+  contextMenu.style.display = "none";
+});
+
+addDeletePanel.onclick = () => {
+  document.getElementById("delete").appendChild(currentElement);
+  currentElement = null;
+};
+
+undo.onclick = () => {
+  if (currentElement == null || undoElement == null) {
+    alert("You can´t undo this task");
+  } else {
+    undoElement.appendChild(currentElement);
+  }
+
+  currentElement = null;
+  undoElement = null;
+};
 
 startBtn.onclick = function () {
   if (!isPaused) {

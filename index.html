@@ -20,8 +20,8 @@
 <body>
 
     <div class="context-menu" style="display: none;">
-        <p>Hola</p>
-        <p>Bitch</p>
+        <button class="cmOption addDeletePanel">Add to delete panel</button>
+        <button class="cmOption undo">Undo</button>
     </div>
     <div class="panel">
         <button id="pomodoro">Pomodoro</button>
@@ -41,12 +41,13 @@
             <!-- <button id="pauseBtn">Pause</button> -->
             <!-- <button id="restartBtn">Reset</button> -->
         </div>
-
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary addTask" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Add Task
     </button>
+
+    </div>
+    
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
