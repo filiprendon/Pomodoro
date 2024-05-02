@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
 * {
     font-family: 'Rubik', cursive;
     /* padding: 0; */
@@ -24,6 +25,7 @@ body {
     padding: 8px 0;
     min-width: 150px;
 }
+
 
 .context-menu button {
     margin: 5px 0;
