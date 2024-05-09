@@ -18,130 +18,140 @@
 </head>
 
 <body>
-    <div class="panel">
-        <button id="pomodoro">Pomodoro</button>
-        <button id="short-break">Short Break</button>
-        <button id="long-break">Long Break</button>
-    </div>
-    <div class="container-temporizador">
-        <div class="temporizador">
-            <!-- <span>25:00</span> -->
-            <p id="min">25</p>
-            <p>:</p>
-            <p id="sec">00</p>
+
+    <div class="menuAll">
+        <div class="context-menu" style="display: none;">
+            <button class="cmOption addDeletePanel">Add to delete panel</button>
+            <button class="cmOption undo">Undo</button>
         </div>
-        <div class="buttons">
-            <button id="startBtn" class="material-symbols-outlined">
-                play_arrow</button>
-            <!-- <button id="pauseBtn">Pause</button> -->
-            <!-- <button id="restartBtn">Reset</button> -->
+        <div class="panel">
+            <button id="pomodoro">Pomodoro</button>
+            <button id="short-break">Short Break</button>
+            <button id="long-break">Long Break</button>
+        </div>
+        <div class="container-temporizador">
+            <div class="temporizador">
+                <!-- <span>25:00</span> -->
+                <p id="min">25</p>
+                <p>:</p>
+                <p id="sec">00</p>
+            </div>
+            <div class="buttons">
+                <button id="startBtn" class="material-symbols-outlined">
+                    play_arrow</button>
+                <!-- <button id="pauseBtn">Pause</button> -->
+                <!-- <button id="restartBtn">Reset</button> -->
+            </div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary addTask" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Task
+            </button>
+
         </div>
 
-    </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add Task
-    </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="add-task-container">
+                            <label for="taskText">Task title:</label>
+                            <input type="text" maxlength="20" name="taskText" id="taskText"
+                                placeholder="Add a task..." />
+                        </div>
+                        <div class="description">
+                            <label for="description">Task description</label>
+                            <input type="text" maxlength="25" name="description" id="description"
+                                placeholder="Add a short description..."></input>
+                        </div>
+                        <div class="category">
+                            <label for="category">Category:</label>
+                            <select class="form-select" id="category" aria-label="Default select example">
+                                <option value="0" selected disabled>Choose a category</option>
+                                <option value="1">Dessign</option>
+                                <option value="2">Front-end</option>
+                                <option value="3">Back-end</option>
+                                <option value="4">No category</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="add" class="button add-button material-symbols-outlined">add_task</button>
+
                 </div>
-
-                <div class="modal-body">
-                    <div class="add-task-container">
-                        <label for="taskText">Task title:</label>
-                        <input type="text" maxlength="20" name="taskText" id="taskText" placeholder="Add a task..." />
-                    </div>
-                    <div class="description">
-                        <label for="description">Task description</label>
-                        <input type="text" maxlength="25" name="description" id="description"
-                            placeholder="Add a short description..."></input>
-                    </div>
-                    <div class="category">
-                        <label for="category">Category:</label>
-                        <select class="form-select" id="category" aria-label="Default select example">
-                            <option value="0" selected disabled>Choose a category</option>
-                            <option value="1">Dessign</option>
-                            <option value="2">Front-end</option>
-                            <option value="3">Back-end</option>
-                            <option value="4">No category</option>
-                        </select>
-                    </div>
-                </div>
-                <button id="add" class="button add-button material-symbols-outlined">add_task</button>
-
             </div>
         </div>
+
+        <div id="kanban">
+
+            <ul class="columns">
+
+                <li class="column to-do-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="column-header">
+                        <h4>To Do</h4>
+                    </div>
+                    <ul class="task-list" id="to-do">
+                        <!-- <li class="task" id="task1" draggable="true" ondragstart="drag(event)">
+                            <p>Prueba</p>
+                        </li>
+                        <li class="task" id="task2" draggable="true" ondragstart="drag(event)">
+                            <p>Prueba 2</p>
+                        </li> -->
+                    </ul>
+                </li>
+
+                <li class="column doing-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="column-header">
+                        <h4>Doing</h4>
+                    </div>
+                    <ul class="task-list" id="doing">
+                        <li class="task" id="task3" draggable="true" ondragstart="drag(event)">
+                            <p>Hola amigos</p>
+                        </li>
+                        <li class="task" id="task4" draggable="true" ondragstart="drag(event)">
+                            <p>De youtube</p>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="column done-column" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="false">
+                    <div class="column-header">
+                        <h4>Done</h4>
+                    </div>
+                    <ul class="task-list" id="done">
+                        <li class="task" id="task5">
+                            <p>Qué pasó con el video?</p>
+                            <span class="check-icon"></span>
+                        </li>
+                        <li class="task" id="task6">
+                            <p>Preuba 100</p>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- <li class="column delete-column" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="column-header">
+                        <h4>Delete</h4>
+                    </div>
+                    <ul class="task-list" id="delete">
+                        <li class="task" id="task7">
+                            <p>Pruebas a borrar</p>
+                        </li>
+                        <li class="task" id="task8">
+                            <p>Hola que tal</p>
+                        </li>
+                    </ul>
+                    <button id="deleteBtn" class="material-symbols-outlined" onclick="deleteTasks()">delete</button>
+                </li> -->
+
+            </ul>
+        </div>
     </div>
 
-    <div id="kanban">
-
-        <ul class="columns">
-
-            <li class="column to-do-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="column-header">
-                    <h4>To Do</h4>
-                </div>
-                <ul class="task-list" id="to-do">
-                    <!-- <li class="task" id="task1" draggable="true" ondragstart="drag(event)">
-                        <p>Prueba</p>
-                    </li>
-                    <li class="task" id="task2" draggable="true" ondragstart="drag(event)">
-                        <p>Prueba 2</p>
-                    </li> -->
-                </ul>
-            </li>
-
-            <li class="column doing-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="column-header">
-                    <h4>Doing</h4>
-                </div>
-                <ul class="task-list" id="doing">
-                    <li class="task" id="task3" draggable="true" ondragstart="drag(event)">
-                        <p>Hola amigos</p>
-                    </li>
-                    <li class="task" id="task4" draggable="true" ondragstart="drag(event)">
-                        <p>De youtube</p>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="column done-column" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="false">
-                <div class="column-header">
-                    <h4>Done</h4>
-                </div>
-                <ul class="task-list" id="done">
-                    <li class="task" id="task5">
-                        <p>Qué pasó con el video?</p>
-                        <span class="check-icon"></span>
-                    </li>
-                    <li class="task" id="task6">
-                        <p>Preuba 100</p>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="column delete-column" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="column-header">
-                    <h4>Delete</h4>
-                </div>
-                <ul class="task-list" id="delete">
-                    <li class="task" id="task7">
-                        <p>Pruebas a borrar</p>
-                    </li>
-                    <li class="task" id="task8">
-                        <p>Hola que tal</p>
-                    </li>
-                </ul>
-                <button id="deleteBtn" class="material-symbols-outlined" onclick="deleteTasks()">delete</button>
-            </li>
-
-        </ul>
-    </div>
 </body>
 
 </html>
